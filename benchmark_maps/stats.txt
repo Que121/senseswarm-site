@@ -1,0 +1,12 @@
+he_small      64 x 59 m   2,439 m2 free   px 638x590
+he_medium     95 x 92 m   5,739 m2 free   px 948x918
+he_large      128 x 121 m   9,574 m2 free   px 1277x1207
+hkust_1f      358 x 176 m   16,106 m2 free   px 1915x1649
+hkust_2f      358 x 174 m   24,015 m2 free   px 3580x1737
+hkust_3f      328 x 168 m   21,869 m2 free   px 3284x1631
+hkust_4f      328 x 158 m   23,028 m2 free   px 3284x1578
+hkust_5f      328 x 129 m   10,376 m2 free   px 3097x1187
+kth_single    132 x 39 m   3,752 m2 free   px 1321x386
+kth_double    116 x 71 m   5,359 m2 free   px 1155x713
+kth_triple    165 x 102 m   11,112 m2 free   px 1647x1024
+kth_quad      231 x 102 m   14,870 m2 free   px 2312x1024

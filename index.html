@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SenseSwarm: Swarm Exploration via Neural Structure Estimation with Shared World-Anticipation for Rapid Mapping</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  img, video { max-width: 100%; height: auto; display: inline-block; }
+  a { color: #2F66C4; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .section { padding: 1.6rem 1.2rem; }
+  .container { margin: 0 auto; }
+  .has-text-centered { text-align: center; }
+  .columns { display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: center; }
+  .column { flex: 1 1 300px; min-width: 280px; }
+  .column.is-one-third { flex: 0 1 31%; min-width: 300px; }
+  .mt-3 { margin-top: 0.9rem; } .mt-4 { margin-top: 1.2rem; } .mt-5 { margin-top: 1.6rem; }
+  .mb-4 { margin-bottom: 1.2rem; }
+  p { line-height: 1.55; }
+  @media (max-width: 760px) { .column.is-one-third { flex-basis: 100%; } }
+  :root { --purple: #82318E; --ink: #15202B; }
+  body { font-family: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif; color: var(--ink); }
+  .hero-title { font-size: 2.1rem; font-weight: 700; line-height: 1.25; }
+  .hero-title .acr { color: var(--purple); }
+  .authors { font-size: 1.15rem; color: #4a5560; margin-top: 0.8rem; }
+  .venue { font-size: 1.0rem; color: #6b7681; margin-top: 0.3rem; }
+  .link-btn { background: var(--ink); color: #fff; border-radius: 9999px; padding: 0.55em 1.4em;
+              margin: 0.25em; display: inline-block; font-weight: 600; }
+  .link-btn:hover { background: var(--purple); color: #fff; }
+  .section-title { font-weight: 700; font-size: 1.6rem; margin: 1.2rem 0 0.8rem; }
+  .tagline { font-size: 1.12rem; color: #4a5560; }
+  .figcap { font-size: 0.92rem; color: #6b7681; margin-top: 0.5rem; text-align: left; }
+  .keybox { background: #f6f3f8; border-left: 4px solid var(--purple); padding: 1rem 1.3rem;
+            border-radius: 6px; font-size: 1.05rem; }
+  video { width: 100%; border-radius: 6px; background: #fff; }
+  .vidcap { font-size: 0.9rem; font-weight: 600; margin-top: 0.25rem; }
+  .vidcap.ours { color: var(--purple); }
+  select { font-size: 1rem; padding: 0.4em 0.8em; border-radius: 6px; }
+  .footer-note { color: #8a949e; font-size: 0.9rem; }
+  pre.bibtex { background: #f4f5f7; border-radius: 6px; padding: 1rem; text-align: left;
+               font-size: 0.85rem; overflow-x: auto; }
+</style>
+</head>
+<body>
+
+<section class="section pt-6 pb-4">
+  <div class="container has-text-centered" style="max-width: 980px;">
+    <h1 class="hero-title">
+      <span class="acr">SenseSwarm</span>: <b>S</b>warm <b>E</b>xploration via <b>N</b>eural
+      <b>S</b>tructure <b>E</b>stimation with <b>S</b>hared <b>W</b>orld-<b>A</b>nticipation
+      for <b>R</b>apid <b>M</b>apping
+    </h1>
+    <p class="authors">Anonymous Authors</p>
+    <p class="venue">Under double-blind review</p>
+    <div class="mt-4">
+      <a class="link-btn" href="#" onclick="return false;">&#128196; Paper (PDF)</a>
+      <a class="link-btn" href="#videos">&#127909; All 108 Runs</a>
+      <a class="link-btn" href="#benchmark">&#127968; Benchmark</a>
+      <a class="link-btn" href="#bibtex">&#128218; BibTeX</a>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-2 pb-4">
+  <div class="container has-text-centered" style="max-width: 980px;">
+    <video autoplay muted loop playsinline src="videos/kth_quad__stig_pred_512_1.mp4"></video>
+    <p class="tagline mt-3">
+      <b>512 robots</b> explore a real <b>231-meter, twelve-story</b> composite building.
+      The purple swarm reconstructs the map (blue = predicted structure) <b>ahead of physical
+      coverage</b>: the chip counts what the swarm <i>knows</i>, not only what it has visited.
+    </p>
+  </div>
+</section>
+
+<section class="section pt-2 pb-4">
+  <div class="container" style="max-width: 880px;">
+    <h2 class="section-title has-text-centered">Abstract</h2>
+    <p style="text-align: justify;">
+      A robot swarm covers a building faster with more robots, but the map is only as complete as the
+      space the robots have physically visited. We ask a different question: how much of an unknown
+      building can a decentralized swarm know, at each instant, before it has walked through it?
+      SenseSwarm serves a lightweight learned map predictor on the swarm's shared occupancy map and folds
+      the predicted structure back into a stigmergic guidance field. Its 709K-parameter predictor is
+      fine-tuned on the swarm's own multi-front observations, which we show is necessary: a single-robot
+      predictor collapses on such views. We build a benchmark of twelve real building floors from
+      HouseExpo, HKUST, and KTH, up to 24,000 square meters, and run 1,620 simulations across nine
+      coordination methods, swarm sizes 32 to 512, and three seeds. On physical coverage the swarm is
+      near parity with a greedy frontier planner, as expected. On map reconstruction, every
+      non-predictive baseline needs 1.3 to 1.9 times longer to reach an 80 percent known map. Folding
+      the prediction into the shared field matters: the same predictor applied per robot matches our
+      speed but suffers a 6.9 times higher inter-robot contact rate at 512 robots. The prediction is
+      computed once per shared map, so its cost stayed flat from 32 to 512 robots.
+    </p>
+    <div class="keybox mt-5">
+      <b>Key idea: predictive stigmergy.</b> One predictor runs on the shared map, and its output
+      becomes an uncertainty-seeded, density-discounted stigmergic field that every robot reads only
+      locally. The cost tracks the frontier, not the robot count. The value is not walking the building
+      faster; it is knowing the building before you walk it.
+    </div>
+  </div>
+</section>
+
+<section class="section pt-2 pb-4">
+  <div class="container has-text-centered" style="max-width: 1080px;">
+    <h2 class="section-title">Method</h2>
+    <img src="images/pipeline.png" alt="SenseSwarm pipeline">
+    <p class="figcap">
+      The SenseSwarm loop. Robots sense locally into the shared occupancy map K. A shared map service
+      tiles the frontier (50% overlap), runs the swarm-distribution predictor once per map, and publishes
+      the reconstruction R(t) and the shared fields F, E, &rho;, &Phi;. The prediction enters coordination
+      as a fourth stigmergic field: uncertainty u = 1 &minus; 2|&sigma; &minus; 0.5| seeds the frontier,
+      and each robot steers by four local gradient reads under reactive avoidance, so the per-robot cost
+      is independent of the swarm size.
+    </p>
+  </div>
+</section>
+
+<section class="section pt-2 pb-4">
+  <div class="container has-text-centered" style="max-width: 1080px;">
+    <h2 class="section-title">Reconstruction leads physical coverage</h2>
+    <img src="images/coverage_strip.png" alt="Coverage versus time on all twelve floors">
+    <p class="figcap">
+      Coverage versus time on all twelve floors (median over three seeds, 256 robots). The purple curve is
+      SenseSwarm's reconstruction; the shaded band above the best baseline is the building known but not
+      yet visited.
+    </p>
+    <img class="mt-5" src="images/efficiency_main.png" alt="Time to 80 percent known map per floor">
+    <p class="figcap">
+      Time to an 80 percent known map, normalized so SenseSwarm is 1.0. Every non-predictive baseline is
+      1.3 to 1.9 times slower on average; the ordering holds on nearly every floor and is significant at
+      p &le; 0.002 against each baseline (Wilcoxon signed-rank).
+    </p>
+    <img class="mt-5" src="images/scaling_row.png" alt="Scaling and safety">
+    <p class="figcap">
+      (a) The margin is flat from 32 to 512 robots. (b) The gain shrinks dimensionally with floor area.
+      (c) Contact rates diverge as the swarm densifies; per-robot prediction congests like uncoordinated
+      frontier. (d) SenseSwarm alone occupies the fast-and-safe corner.
+    </p>
+  </div>
+</section>
+
+<section class="section pt-2 pb-4">
+  <div class="container has-text-centered" style="max-width: 980px;">
+    <h2 class="section-title">Qualitative behavior</h2>
+    <p class="tagline">Watch the same floor explored live: the baseline bunches along corridors,
+      while SenseSwarm (purple) is pulled toward rooms it has predicted (blue) but not yet entered.</p>
+    <div class="columns mt-3">
+      <div class="column">
+        <video autoplay muted loop playsinline preload="metadata" src="videos/he_medium__frontier_256_1.mp4"></video>
+        <p class="vidcap">Nearest-frontier, apartment floor (HE-M)</p>
+      </div>
+      <div class="column">
+        <video autoplay muted loop playsinline preload="metadata" src="videos/he_medium__stig_pred_256_1.mp4"></video>
+        <p class="vidcap ours">SenseSwarm (ours), apartment floor (HE-M)</p>
+      </div>
+    </div>
+    <div class="columns mt-3">
+      <div class="column">
+        <video autoplay muted loop playsinline preload="metadata" src="videos/hkust_4f__frontier_256_1.mp4"></video>
+        <p class="vidcap">Nearest-frontier, campus floor (HK-4, 23,000 m&sup2;)</p>
+      </div>
+      <div class="column">
+        <video autoplay muted loop playsinline preload="metadata" src="videos/hkust_4f__stig_pred_256_1.mp4"></video>
+        <p class="vidcap ours">SenseSwarm (ours), campus floor (HK-4)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-2 pb-4" id="benchmark">
+  <div class="container has-text-centered" style="max-width: 760px;">
+    <h2 class="section-title">The benchmark: twelve real floors</h2>
+    <img src="images/benchmark.svg" alt="The twelve benchmark floors">
+    <p class="figcap">
+      Three HouseExpo apartments, four KTH corridor composites built from real stories by a deterministic
+      seeded rule, and five HKUST campus floors rasterized per BIM category from SLABIM, up to 24,015
+      square meters. Full-resolution maps are in
+      <a href="benchmark_maps/">benchmark_maps/</a> and the construction scripts in
+      <a href="scripts/">scripts/</a>.
+    </p>
+  </div>
+</section>
+
+<section class="section pt-2 pb-4" id="videos">
+  <div class="container has-text-centered" style="max-width: 1150px;">
+    <h2 class="section-title">Every floor, every method</h2>
+    <p class="tagline">All 108 exploration runs (12 floors &times; 9 methods, 256 robots, seed 1),
+      replayed from the logged campaign. Pick a floor:</p>
+    <div class="mt-3 mb-4">
+      <select id="scenePick" onchange="buildGrid()"></select>
+    </div>
+    <div id="vidGrid" class="columns is-multiline"></div>
+  </div>
+</section>
+
+<section class="section pt-2 pb-5" id="bibtex">
+  <div class="container" style="max-width: 880px;">
+    <h2 class="section-title has-text-centered">BibTeX</h2>
+    <pre class="bibtex">@inproceedings{senseswarm,
+  title     = {SenseSwarm: Swarm Exploration via Neural Structure Estimation
+               with Shared World-Anticipation for Rapid Mapping},
+  author    = {Anonymous},
+  booktitle = {Under review},
+  year      = {2026}
+}</pre>
+    <p class="footer-note has-text-centered mt-5">
+      Anonymous project page for double-blind review. Website layout adapted from the
+      <a href="https://nerfies.github.io/">Nerfies</a> template (CC BY-SA 4.0).
+    </p>
+  </div>
+</section>
+
+<script>
+const SCENES = {
+  "he_small": "HE-S (HouseExpo, 2,439 m²)", "he_medium": "HE-M (HouseExpo, 5,739 m²)",
+  "he_large": "HE-L (HouseExpo, 9,574 m²)", "hkust_1f": "HK-1 (HKUST, 16,106 m²)",
+  "hkust_2f": "HK-2 (HKUST, 24,015 m²)", "hkust_3f": "HK-3 (HKUST, 21,869 m²)",
+  "hkust_4f": "HK-4 (HKUST, 23,028 m²)", "hkust_5f": "HK-5 (HKUST, 10,376 m²)",
+  "kth_single": "KTH-1 (3,752 m²)", "kth_double": "KTH-2 (5,359 m²)",
+  "kth_triple": "KTH-3 (11,112 m²)", "kth_quad": "KTH-4 (14,870 m², twelve stories)"
+};
+const METHODS = [
+  ["stig_pred", "SenseSwarm (ours)"], ["frontier", "Nearest-frontier"], ["mmpf", "MMPF"],
+  ["alloc", "MinPos"], ["dsbpf", "DMPF-style PF"], ["stig", "Pure stigmergy"],
+  ["flow", "Handed-lane"], ["slug", "Settling gradient"], ["pred", "Per-robot pred. (ablation)"]
+];
+const sel = document.getElementById("scenePick");
+for (const [k, v] of Object.entries(SCENES)) {
+  const o = document.createElement("option"); o.value = k; o.textContent = v; sel.appendChild(o);
+}
+function buildGrid() {
+  const sc = sel.value, grid = document.getElementById("vidGrid");
+  grid.innerHTML = "";
+  for (const [m, name] of METHODS) {
+    const col = document.createElement("div");
+    col.className = "column is-one-third";
+    const ours = m === "stig_pred";
+    col.innerHTML = `<video controls muted loop preload="${ours ? "auto" : "none"}" ${ours ? "autoplay playsinline" : ""}
+        src="videos/${sc}__${m}_256_1.mp4"></video>
+      <p class="vidcap${ours ? " ours" : ""}">${name}</p>`;
+    grid.appendChild(col);
+  }
+}
+buildGrid();
+</script>
+</body>
+</html>
