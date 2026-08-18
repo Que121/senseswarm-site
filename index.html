@@ -67,7 +67,7 @@
     <video autoplay muted loop playsinline src="videos/kth_quad__stig_pred_512_1.mp4"></video>
     <p class="tagline mt-3">
       <b>512 robots</b> explore a real <b>231-meter, twelve-story</b> composite building.
-      The purple swarm reconstructs the map (blue = predicted structure) <b>ahead of physical
+      The purple swarm reconstructs the map (orange = predicted structure) <b>ahead of physical
       coverage</b>: the chip counts what the swarm <i>knows</i>, not only what it has visited.
     </p>
   </div>
@@ -143,18 +143,18 @@
 <section class="section pt-2 pb-4">
   <div class="container has-text-centered" style="max-width: 980px;">
     <h2 class="section-title">Qualitative behavior</h2>
-    <p class="tagline">Watch the same floor explored live: the baseline bunches along corridors,
-      while SenseSwarm (purple) is pulled toward rooms it has predicted (blue) but not yet entered.</p>
-    <div class="columns mt-3">
-      <div class="column">
-        <video autoplay muted loop playsinline preload="metadata" src="videos/he_medium__frontier_256_1.mp4"></video>
-        <p class="vidcap">Nearest-frontier, apartment floor (HE-M)</p>
-      </div>
-      <div class="column">
-        <video autoplay muted loop playsinline preload="metadata" src="videos/he_medium__stig_pred_256_1.mp4"></video>
-        <p class="vidcap ours">SenseSwarm (ours), apartment floor (HE-M)</p>
-      </div>
-    </div>
+    <p class="tagline">The same floor, the same clock, side by side. Physical coverage stays close:
+      a greedy frontier planner is already near optimal at walking a building. What pulls ahead is the
+      <b>known</b> map, because SenseSwarm reconstructs rooms (orange) before any robot enters them.</p>
+    <video class="mt-4" autoplay muted loop playsinline preload="metadata"
+           src="videos/he_medium__cmp_frontier_vs_stig_pred_256_1.mp4"></video>
+    <p class="vidcap">Apartment floor (HE-M), 256 robots</p>
+    <video class="mt-5" autoplay muted loop playsinline preload="metadata"
+           src="videos/hkust_4f__cmp_frontier_vs_stig_pred_256_1.mp4"></video>
+    <p class="vidcap">Campus floor (HK-4, 23,000 m&sup2;), 256 robots</p>
+    <video class="mt-5" muted loop controls playsinline preload="none"
+           src="videos/kth_quad__cmp_frontier_vs_stig_pred_512_1.mp4"></video>
+    <p class="vidcap">Twelve-story composite (KTH-4, 231 m), 512 robots</p>
     <div class="columns mt-3">
       <div class="column">
         <video autoplay muted loop playsinline preload="metadata" src="videos/hkust_4f__frontier_256_1.mp4"></video>
