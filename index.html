@@ -155,16 +155,6 @@
     <video class="mt-5" autoplay muted loop playsinline preload="metadata"
            src="videos/kth_quad__cmp_frontier_vs_stig_pred_512_1.mp4"></video>
     <p class="vidcap">Twelve-story composite (KTH-4, 231 m), 512 robots</p>
-    <div class="columns mt-3">
-      <div class="column">
-        <video autoplay muted loop playsinline preload="metadata" src="videos/hkust_4f__frontier_256_1.mp4"></video>
-        <p class="vidcap">Nearest-frontier, campus floor (HK-4, 23,000 m&sup2;)</p>
-      </div>
-      <div class="column">
-        <video autoplay muted loop playsinline preload="metadata" src="videos/hkust_4f__stig_pred_256_1.mp4"></video>
-        <p class="vidcap ours">SenseSwarm (ours), campus floor (HK-4)</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -187,6 +177,12 @@
     <h2 class="section-title">Every floor, every method</h2>
     <p class="tagline">All 108 exploration runs (12 floors &times; 9 methods, 256 robots, seed 1),
       replayed from the logged campaign. Pick a floor:</p>
+    <p class="figcap" style="text-align:center; max-width: 760px; margin: 0 auto;">
+      Each clip plays its own run, so at any moment the panels are at different ticks; for equal-time
+      comparison use the shared-clock videos above. Per-robot prediction is <b>our own ablation</b>, not a
+      competing method: it runs the same predictor on every robot, which is why it matches our speed. It
+      pays for that speed in collisions, 3.58 against our 0.52 contacts per robot per 100 m at 512 robots.
+    </p>
     <div class="mt-3 mb-4">
       <select id="scenePick" onchange="buildGrid()"></select>
     </div>
