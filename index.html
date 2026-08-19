@@ -33,7 +33,7 @@
   .figcap { font-size: 0.92rem; color: #6b7681; margin-top: 0.5rem; text-align: left; }
   .keybox { background: #f6f3f8; border-left: 4px solid var(--purple); padding: 1rem 1.3rem;
             border-radius: 6px; font-size: 1.05rem; }
-  video { width: 100%; border-radius: 6px; background: #fff; }
+  video { width: 100%; border-radius: 6px; background: #f4f5f7; min-height: 120px; }
   .vidcap { font-size: 0.9rem; font-weight: 600; margin-top: 0.25rem; }
   .vidcap.ours { color: var(--purple); }
   select { font-size: 1rem; padding: 0.4em 0.8em; border-radius: 6px; }
@@ -232,7 +232,7 @@ function buildGrid() {
     const col = document.createElement("div");
     col.className = "column is-one-third";
     const ours = m === "stig_pred";
-    col.innerHTML = `<video muted loop playsinline preload="none"
+    col.innerHTML = `<video autoplay muted loop playsinline preload="metadata"
         src="videos/${sc}__${m}_256_1.mp4"></video>
       <p class="vidcap${ours ? " ours" : ""}">${name}</p>`;
     grid.appendChild(col);
